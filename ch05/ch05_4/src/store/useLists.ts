@@ -19,6 +19,10 @@ export const useLists = () => {
     ({ listidCardidOrders }) => listidCardidOrders
   );
 
+  const listidOrders = useSelector<AppState, LO.State>(
+    ({ listidOrders }) => listidOrders
+  );
+
   const onCreateList = useCallback(
     (uuid: string, title: string) => {
       const list = { uuid, title };
@@ -40,5 +44,20 @@ export const useLists = () => {
     },
     [dispatch, listidCardidOrders]
   );
-  return { lists, onCreateList, onRemoveList };
+
+  const onMoveList = useCallback(
+    (dragIndex: number, hoverIndex: number) => {
+      const newOrders = listidOrders.map((item, index) =>
+        index === dragIndex
+          ? listidOrders[hoverIndex]
+          : index === hoverIndex
+          ? listidOrders[dragIndex]
+          : item
+      );
+      dispatch(LO.setListidOrders(newOrders));
+    },
+    [dispatch, listidOrders]
+  );
+
+  return { lists, onCreateList, onRemoveList, onMoveList };
 };
