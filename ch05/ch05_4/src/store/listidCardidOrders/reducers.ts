@@ -22,7 +22,7 @@ export const reducer = (state: T.State = initialState, action: T.Actions) => {
       const cardids = state[action.payload.listid];
       return {
         ...state,
-        [action.payload.listid]: [...cardids, action.payload.cardid],
+        [action.payload.listid]: [action.payload.cardid, ...cardids],
       };
     }
     case "@listidCardids/removeCardid": {
