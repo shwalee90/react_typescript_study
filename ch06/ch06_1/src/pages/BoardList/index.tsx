@@ -1,7 +1,8 @@
 import type { FC } from "react";
 import type { List } from "../../store/commonTypes";
 import type { MoveFunc } from "../../components";
-import { useMemo } from "react";
+import { useMemo, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import { Div } from "../../components";
 import { Icon } from "../../theme/daisyui";
 import { ListDraggable } from "../../components";
@@ -27,6 +28,14 @@ const BoardList: FC<BoardListProps> = ({
     list.uuid
   );
 
+  const navigate = useNavigate();
+  const cardClicked = useCallback(
+    (cardid: string) => () => {
+      navigate(`/board/card/${cardid}`);
+    },
+    [navigate]
+  );
+
   const children = useMemo(
     () =>
       cards.map((card, index) => (
@@ -36,9 +45,10 @@ const BoardList: FC<BoardListProps> = ({
           onRemove={onRemoveCard(card.uuid)}
           draggableId={card.uuid}
           index={index}
+          onClick={cardClicked(card.uuid)}
         />
       )),
-    [cards, onRemoveCard]
+    [cards, onRemoveCard, cardClicked]
   );
 
   return (

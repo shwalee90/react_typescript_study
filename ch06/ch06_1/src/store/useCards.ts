@@ -22,6 +22,7 @@ export const useCards = (listid: UUID) => {
   const onAppendCard = useCallback(() => {
     const card = D.makeRandomCard();
     dispatch(C.addCard(card));
+    
     dispatch(LC.appendCardidToListid({ listid, cardid: card.uuid }));
   }, [dispatch, listid]);
 

@@ -1,4 +1,3 @@
-import { act } from "react-dom/test-utils";
 import * as T from "./types";
 
 const initialState: T.State = {};

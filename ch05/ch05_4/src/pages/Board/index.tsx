@@ -7,6 +7,9 @@ import BoardList from "../BoardList";
 import { ListDroppable } from "../../components";
 import { useLists } from "../../store/useLists";
 
+import * as LO from "../../store/listidOrders";
+import * as L from "../../store/listEntities";
+
 export default function Board() {
   const divRef = useRef<HTMLDivElement>(null);
   const [, drop] = useDrop({

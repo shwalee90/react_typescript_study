@@ -1,10 +1,20 @@
-import { Title } from "../components";
+import { useCallback } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
-export default function CopyMe() {
+export default function Card() {
+  const location = useLocation();
+
+  const navigate = useNavigate();
+  const goBack = useCallback(() => {
+    navigate(-1);
+  }, [navigate]);
+
   return (
-    <section className="mt-4">
-      <h2 className="font-bold text-5xl text-center">CopyMe</h2>
-      <div className="mt-4"></div>
-    </section>
+    <div>
+      <p>location:{JSON.stringify(location, null, 2)}</p>
+      <button className="mt-4 btn btn-primary btn-xs" onClick={goBack}>
+        goBack
+      </button>
+    </div>
   );
 }
