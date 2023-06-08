@@ -6,3 +6,4 @@ export * from "./User";
 export * from "./Card";
 
 export * from "./fetchRandomUser";
+export * from "./CustomerComment";
