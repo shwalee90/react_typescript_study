@@ -1,3 +1,4 @@
+import * as U from "../utils";
 import type { FC, PropsWithChildren } from "react";
 import { createContext, useContext, useState, useCallback } from "react";
 
@@ -28,7 +29,9 @@ export const AuthProvider: FC<PropsWithChildren<AuthProviderProps>> = ({
 
   const signup = useCallback(
     (email: string, password: string, callback?: Callback) => {
+      const user = { email, password };
       setLoggedUser((notUsed) => ({ email, password }));
+      U.writeObjectP("user", user).finally(() => callback && callback());
     },
     []
   );
